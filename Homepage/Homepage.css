@@ -1,0 +1,367 @@
+  /* CSS Styles for the Clinic Website */
+
+/* Resetting default margin and padding */
+body,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Setting default font */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Background styling */
+body {
+  background: #7ed6df;
+  /* Fallback for older browsers */
+  background: linear-gradient(180deg, #7ed6df, #000000);
+}
+
+/* Styling preloader */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it appears above other content */
+}
+
+.loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loader-outter,
+.loader-inner {
+  position: absolute;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+.loader-outter {
+  border: 4px solid #f3f3f3;
+}
+
+.loader-inner {
+  border: 4px solid transparent;
+  border-top-color: #3498db;
+}
+
+.indicator {
+  position: absolute;
+  top: -20px;
+  left: -30px;
+  animation: bounce 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+/* Styling main menu */
+.main-menu {
+  background-color: #333;
+  color: #fff;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0; /* Updated to position at the top */
+  left: 0;
+  width: 100%; /* Take full width of the viewport */
+  background-color:linear-gradient(9999deg, #181818, #333333);
+  color: #fff;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+}
+
+.menu li {
+  padding: 10px 20px;
+}
+
+.menu li.active {
+  background-color: #555;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #9b9b9b;
+}
+
+.menu a:hover {
+  color: #3498db;
+}
+
+/* Styling dropdown menu */
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  list-style: none;
+  padding: 0;
+}
+
+.menu li:hover .dropdown {
+  display: block;
+}
+
+.dropdown li {
+  padding: 10px 20px;
+}
+
+.dropdown li:hover {
+  background-color: #555;
+}
+
+/* Custom CSS for navigation links */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --x: 0;
+  --y: 0;
+  --xp: 0;
+  --yp: 0;
+  --hue: calc(0 + (var(--xp) * 500));
+  --bg: hsl(0 0% 10%);
+  --size: 100px;
+  --glow: radial-gradient(50% 50% at center, hsl(var(--hue) 80% 85%), hsl(var(--hue) 80% 70%), transparent) calc((var(--x) * 1px) - (var(--size) * 0.5)) calc((var(--y) * 1px) - (var(--size) * 0.5)) / var(--size) var(--size) no-repeat fixed;
+}
+
+.controls {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+body {
+  display: flex;
+  place-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
+  background: var(--bg);
+}
+
+.nav-button {
+  --x: 0;
+  --y: 0;
+  --xp: 0;
+  --yp: 0;
+  --hue: calc(0 + (var(--xp) * 500));
+  --bg: hsl(0 0% 10%);
+  --size: 100px;
+  --glow: radial-gradient(50% 50% at center, hsl(var(--hue) 80% 85%), hsl(var(--hue) 80% 70%), transparent) calc((var(--x) * 1px) - (var(--size) * 0.5)) calc((var(--y) * 1px) - (var(--size) * 0.5)) / var(--size) var(--size) no-repeat fixed;
+
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1ch;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--glow), linear-gradient(black, black) border-box;
+  border: 4px solid transparent;
+  box-shadow: 0 1px hsl(0 0% 100% / 0.15) inset;
+  cursor: pointer;
+  transition: background-size 0.24s;
+  touch-action: none;
+  position: relative;
+  padding: 1rem 2rem;
+}
+
+.nav-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 1px hsl(0 0% 100% / 0.15) inset;
+  background: var(--bg);
+  z-index: 2;
+  /*   border: 4px solid transparent; */
+  border-radius: 1rem;
+}
+
+.nav-button span {
+  background: var(--glow), black;
+  background-clip: text;
+  color: transparent;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  inset: 0;
+}
+
+:root:has(.nav-button:active) {
+  --size: 300px;
+}
+
+.nav-button::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  filter: blur(20px);
+  border: 4px solid transparent;
+  background: var(--glow);
+  border-radius: 1rem;
+}
+
+.nav-link:hover {
+  color: #3498db;
+}
+
+.dropdown-link {
+  padding: 10px 20px;
+}
+
+.dropdown-link:hover {
+  background-color: #555;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
+    padding: 20px;
+  }
+
+  .slider {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    overflow: hidden;
+  }
+  
+  .slider img {
+    width: 100%;
+    display: none;
+  }
+  
+  .slider img:first-child {
+    display: block;
+  }
+
+  *,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+:root {
+  --x: 0;
+  --y: 0;
+  --xp: 0;
+  --yp: 0;
+	--hue: calc(0 + (var(--xp) * 500));
+	--bg: hsl(0 0% 10%);
+	--size: 100px;
+	--glow: radial-gradient(
+			50% 50% at center,
+			hsl(var(--hue) 80% 85%),
+			hsl(var(--hue) 80% 70%),
+			transparent
+		)
+		calc((var(--x) * 1px) - (var(--size) * 0.5))
+		calc((var(--y) * 1px) - (var(--size) * 0.5)) / var(--size) var(--size) no-repeat fixed;
+}
+
+.controls {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+body {
+	display: flex;
+	place-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+	min-height: 100vh;
+	font-family:  "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
+	background: var(--bg);
+}
+
+button {
+	border-radius: 1rem;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 0.1ch;
+	background: var(--bg);
+	border: 4px solid transparent;
+	box-shadow: 0 1px hsl(0 0% 100% / 0.15) inset;
+	cursor: pointer;
+	background:
+		linear-gradient(var(--bg), var(--bg)) padding-box,
+		var(--glow),
+		linear-gradient(black, black) border-box;
+	transition: background-size 0.24s;
+  touch-action: none;
+  position: relative;
+	padding: 1rem 2rem;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 1px hsl(0 0% 100% / 0.15) inset;
+  background: var(--bg);
+  z-index: 2;
+/*   border: 4px solid transparent; */
+  border-radius: 1rem;
+}
+
+button span {
+	background: var(--glow), black;
+	background-clip: text;
+	color: transparent;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  inset: 0;
+}
+
+:root:has(button:active) {
+	--size: 300px;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  filter: blur(20px);
+  border: 4px solid transparent;
+  background: var(--glow);
+  border-radius: 1rem;
+}
