@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Doctors</title>
+
+    <!-- Include EmailJS library -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    // Initialize EmailJS with your user ID
+    emailjs.init("vdpqtPYUOkCUbnHDQ"); // Replace YOUR_USER_ID with your actual EmailJS user ID
+  </script>
     <style>
         /* Reset default margin and padding */
         * {
@@ -204,10 +211,22 @@
                             <input type="text" name="phone" id="phone" placeholder="Enter your phone number">
                         </div>
                         <div>
+                            <label for="phone">Appointment  Date and Time :</label><br/>
+                            <select name="time" id="time">
+                                <option value="12:00">12:00</option>
+                                <option value="1:00">01:00</option>
+                                <option value="02:00">02:00</option>
+                                <option value="03:00">03:00</option>
+                                <option value="04:00">04:00</option>
+                                <option value="05:00">05:00</option>
+                                <option value="06:00">06:00</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="msg">Message :</label>
                             <textarea name="msg" id="msg" cols="40" rows="10" placeholder="Enter your message"></textarea>
                         </div>
-                        <input type="button" value="Submit">
+                        <input type="button" onclick="sendEmail(event)" value="Submit">
                     </form>
                 </div>
             </article>
@@ -227,29 +246,40 @@
         </div>
     </div>
 </body>
-<script>
-    // Get the current URL
-    const currentUrl = window.location.href;
+<script src="Contactss.html"></script>
+<script type="text/javascript">
+    function sendEmail(event) {
+      event.preventDefault(); // Prevent default form submission
 
-    // Get all navigation buttons
-    const navButtons = document.querySelectorAll('.nav-button');
+      // Get user input values
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let phone = document.getElementById('phone').value;
+      let msg = document.getElementById('msg').value;
+      let time = document.getElementById('time').value;
+    //   let message = document.getElementById('message').value;
 
-    // Loop through each button
-    navButtons.forEach(button => {
-        // If the button's href matches the current URL
-        if (button.href === currentUrl) {
-            // Add the 'active' class to highlight it
-            button.classList.add('active');
-        }
-    });
+      // Prepare email parameters
+      let params = {
+        from_name: name,
+        reply_to: email,
+        phone:phone,
+        time:time,
+        message: msg
+      };
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const submitButton = document.querySelector('form button');
 
-        submitButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            alert('Your message has been sent!');
+      // Send email using EmailJS
+      emailjs.send("service_5wxiywo", "template_jnya3fb", params)
+        .then(function(response) {
+          console.log('Email sent:', response);
+          alert('Email sent successfully!');
+        //   document.getElementById('contact-form').reset(); // Reset form after successful submission
+        })
+        .catch(function(error) {    
+          console.error('Error sending email:', error);
+          alert('An error occurred while sending the email. Please try again later.');
         });
-    });
-</script>
+    }
+  </script>
 </html>
