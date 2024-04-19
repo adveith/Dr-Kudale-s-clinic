@@ -2,6 +2,7 @@
 name            = "dr-kudale-s-clinic"
 version         = "0.1.0"
 description     = "Add your description here"
+authors         = [{ name = "Adveith", email = "adveith17@gmail.com" }]
 authors         = [{ name = "aspizu", email = "aspizu@protonmail.com" }]
 dependencies    = ["python-telegram-bot>=21.0.1", "rich>=13.7.1"]
 readme          = "README.md"
