@@ -18,6 +18,7 @@
             background: linear-gradient(to bottom, #1dd0ac, #dae907);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -150,14 +151,38 @@
             margin-bottom: 5px;
         }
 
-        @media screen and (max-width: 768px) {
-            .map-container iframe {
-                height: 200px; /* Adjust the height for smaller screens */
-            }
+        /* Navigation button styles */
+        .nav-button {
+            background-color: #08b352e3;
+            color: #080606;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+            text-decoration: none;
         }
+
+        .nav-button:hover {
+            background-color: #4c0fae;
+        }
+
+        /* Active button style */
+        .nav-button.active {
+            background-color: #4c0fae;
+        }
+
     </style>
 </head>
 <body>
+    <div class="nav-container">
+        <a href="Homepage.html" class="nav-button">Homepage</a>
+        <a href="Contactss.html" class="nav-button">Contact Us</a>
+        <a href="Service.html" class="nav-button">Services</a>
+        <a href="AboutDoctors.html" class="nav-button">About Doctors</a>
+        <a href="appointment.html" class="nav-button">Appointments</a>
+    </div>
     <div class="container">
         <div class="blog-header">
             <h2 class="blog-title">Contact us</h2>
@@ -202,4 +227,29 @@
         </div>
     </div>
 </body>
+<script>
+    // Get the current URL
+    const currentUrl = window.location.href;
+
+    // Get all navigation buttons
+    const navButtons = document.querySelectorAll('.nav-button');
+
+    // Loop through each button
+    navButtons.forEach(button => {
+        // If the button's href matches the current URL
+        if (button.href === currentUrl) {
+            // Add the 'active' class to highlight it
+            button.classList.add('active');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitButton = document.querySelector('form button');
+
+        submitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('Your message has been sent!');
+        });
+    });
+</script>
 </html>
