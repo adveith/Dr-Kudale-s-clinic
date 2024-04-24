@@ -33,11 +33,30 @@ connection.connect((err) => {
 });
 
 // Define route to render contact us page
+
+
+app.get('/about', (req, res) => {
+    res.render('AboutDoctors');
+});
+
+app.get('/about/doctor1', (req, res) => {
+    res.render('DrMaheshKudale');
+});
+
+app.get('/about/doctor2', (req, res) => {
+    res.render('DrMaheshKudale');
+});
+
+app.get('/service', (req, res) => {
+    res.render('Service');
+});
+
 app.get('/contact-us', (req, res) => {
     res.render('Contactss');
 });
 
 // Define route to render homepage
+
 app.get('/', (req, res) => {
     res.render('Homepage');
 });
