@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
+const { body, validationResult } = require('express-validator');
+const sanitizeHtml = require('sanitize-html');
 
 const app = express();
 
@@ -32,9 +34,7 @@ connection.connect((err) => {
     }
 });
 
-// Define route to render contact us page
-
-
+// Define routes to render different pages
 app.get('/about', (req, res) => {
     res.render('AboutDoctors');
 });
@@ -44,7 +44,7 @@ app.get('/about/doctor1', (req, res) => {
 });
 
 app.get('/about/doctor2', (req, res) => {
-    res.render('DrMaheshKudale');
+    res.render('DrSheetalKudale');
 });
 
 app.get('/service', (req, res) => {
@@ -56,27 +56,68 @@ app.get('/contact-us', (req, res) => {
 });
 
 // Define route to render homepage
-
 app.get('/', (req, res) => {
     res.render('Homepage');
 });
 
-// Handle form submission
-app.post('/submit-form', (req, res) => {
-    const formData = req.body;
-    const { name, phone, email, message } = formData; // Destructure form data
+app.get('/Homepage', (req, res) => {
+    res.render('Homepage');
+});
 
+app.get('/AboutDoctors', (req, res) => {
+    res.render('AboutDoctors');
+});
+
+// Handle form submission
+app.post('/submit-form', [
+    // Validate and sanitize form fields
+    body('name').notEmpty().trim().escape(),
+    body('phone').isMobilePhone(),
+    body('email').isEmail().normalizeEmail(),
+    body('message').notEmpty().trim().escape()
+], (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Extract form data
+    const formData = req.body;
+    const { name, phone, email, message } = formData;
+
+    // Sanitize form data
+    const sanitizedMessage = sanitizeHtml(message);
+
+    // Insert sanitized data into the database
     const sql = 'INSERT INTO contact_submissions (name, phone, email, message) VALUES (?, ?, ?, ?)';
-    const values = [name, phone, email, message];
+    const values = [name, phone, email, sanitizedMessage];
 
     connection.query(sql, values, (error, results) => {
         if (error) {
             console.error('Error inserting data into MySQL:', error);
-            res.status(500).send('Error submitting form');
-        } else {
-            console.log('Data inserted into MySQL:', results);
-            res.send('Form submitted successfully!');
+            next(error);
+            return;
         }
+        console.log('Data inserted into MySQL:', results);
+        res.send('Form submitted successfully!');
+    });
+});
+
+// Define route to display contact submissions
+app.get('/contact-submissions', (req, res) => {
+    // Query to fetch all contact submissions from the database
+    const sql = 'SELECT * FROM contact_submissions';
+
+    // Execute the query
+    connection.query(sql, (error, results) => {
+        if (error) {
+            console.error('Error fetching data from MySQL:', error);
+            res.status(500).send('Error fetching data from database');
+            return;
+        }
+
+        // Render the Contactss.ejs view and pass the retrieved data as context
+        res.render('Contactss', { submissions: results });
     });
 });
 
