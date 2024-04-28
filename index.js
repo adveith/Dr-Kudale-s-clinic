@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 // Create MySQL database connection
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'clinic_user',
+    user: ' ',
     password: 'password',
     database: 'clinic'
 });
@@ -120,6 +120,22 @@ app.get('/contact-submissions', (req, res) => {
         res.render('Contactss', { submissions: results });
     });
 });
+
+app.post('/submit-form', (req, res) => {
+    const { name, email, phone, message } = req.body;
+  
+    // Insert form data into the database
+    const sql = 'INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [name, email, phone, message], (err, result) => {
+      if (err) {
+        console.error('Error inserting data into MySQL:', err);
+        res.status(500).json({ success: false, error: 'Failed to submit form' });
+      } else {
+        console.log('Form data inserted into MySQL:', result);
+        res.status(200).json({ success: true, message: 'Form submitted successfully' });
+      }
+    });
+  });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
