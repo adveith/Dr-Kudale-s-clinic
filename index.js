@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 // Create MySQL database connection
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: ' ',
+    user: 'clinic_user',
     password: 'password',
     database: 'clinic'
 });
@@ -76,6 +76,7 @@ app.post('/submit-form', [
     body('email').isEmail().normalizeEmail(),
     body('message').notEmpty().trim().escape()
 ], (req, res, next) => {
+    console.log(req.body.name);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -123,7 +124,7 @@ app.get('/contact-submissions', (req, res) => {
 
 app.post('/submit-form', (req, res) => {
     const { name, email, phone, message } = req.body;
-  
+    
     // Insert form data into the database
     const sql = 'INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)';
     connection.query(sql, [name, email, phone, message], (err, result) => {
