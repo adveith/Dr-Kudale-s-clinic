@@ -1,36 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Display</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-<div class="bg-white">
-    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-      <h2 class="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-  
-      <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        <div class="group relative">
-          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img src="" alt="service" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-          </div>
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                 Service
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">About The product</p>
-            </div>
-          </div>
-        </div>
-  
-        <!-- More products... -->
-      </div>
-    </div>
+<body class="bg-gray-100">
+
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Services We Provide</h2>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <!-- Product cards will be inserted here dynamically -->
   </div>
-  
+</div>
+
+<script>
+// You can add JavaScript code here to dynamically fetch and populate product data
+// For demonstration purposes, let's assume we have an array of product objects
+
+const products = [
+  {
+    name: "Service",
+    imageUrl: "https://www.istockphoto.com/photo/doctors-comforting-disabled-elderly-patient-gm1418999473-465509682",
+    price: "₹99",
+    link: "#"
+  },
+  {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+    price: "₹99",
+    link: "#"
+  },
+  {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+    price: "₹99",
+    link: "#"
+  },
+  {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    price: "₹99",
+    link: "#"
+  },
+  {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    price: "₹99",
+    link: "#"
+  }, {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    price: "₹99",
+    link: "#"
+  }, {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    price: "₹99",
+    link: "#"
+  }, {
+    name: "Service",
+    imageUrl: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    price: "₹99",
+    link: "#"
+  }
+];
+
+// Function to create product cards dynamically
+function createProductCards() {
+  const productGrid = document.querySelector(".grid");
+
+  products.forEach(product => {
+    const productCard = document.createElement("a");
+    productCard.href = product.link;
+    productCard.classList.add("group", "flex", "flex-col", "items-center", "p-4", "bg-white", "shadow-md", "rounded-lg", "hover:shadow-xl", "transition", "duration-300", "ease-in-out");
+
+    const image = document.createElement("img");
+    image.src = product.imageUrl;
+    image.alt = product.name;
+    image.classList.add("h-64", "w-full", "object-cover", "rounded-t-lg");
+
+    const productName = document.createElement("h3");
+    productName.textContent = product.name;
+    productName.classList.add("text-lg", "font-semibold", "text-gray-800", "my-2");
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = product.price;
+    productPrice.classList.add("text-gray-600");
+
+    productCard.appendChild(image);
+    productCard.appendChild(productName);
+    productCard.appendChild(productPrice);
+
+    productGrid.appendChild(productCard);
+  });
+}
+
+// Call the function to create product cards when the page loads
+window.onload = createProductCards;
+</script>
+
 </body>
 </html>

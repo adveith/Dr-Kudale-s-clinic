@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "drkudale",
   "version": "1.0.0",
   "description": "Clinic website backend",
   "main": "index.js",
@@ -20,6 +20,7 @@
     "express-validator": "^7.0.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.7",
+    "node": "^22.0.0",
     "nodemon": "^3.1.0",
     "sanitize-html": "^2.13.0"
   }

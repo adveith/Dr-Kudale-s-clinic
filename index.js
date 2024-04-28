@@ -1,10 +1,13 @@
 const express = require('express');
 const path = require('path');
-const mysql = require('mysql');
+// const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
 const sanitizeHtml = require('sanitize-html');
-
+const db = require('./db/conn.js'); 
 const app = express();
+
+
+// --------------------Middlewares and View Engine Setup -------------------
 
 // Body parsing middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
@@ -16,23 +19,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Create MySQL database connection
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'clinic_user',
-    password: 'password',
-    database: 'clinic'
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('An error occurred:', err);
+    res.status(500).send('Internal Server Error');
 });
-
-// Connect to MySQL database
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to MySQL database:', err);
-        process.exit(1); // Exit the application if unable to connect to the database
-    } else {
-        console.log('Connected to MySQL database');
-    }
-});
+// -------------------APIS----------------------
 
 // Define routes to render different pages
 app.get('/about', (req, res) => {
@@ -68,41 +60,20 @@ app.get('/AboutDoctors', (req, res) => {
     res.render('AboutDoctors');
 });
 
-// Handle form submission
-app.post('/submit-form', [
-    // Validate and sanitize form fields
-    body('name').notEmpty().trim().escape(),
-    body('phone').isMobilePhone(),
-    body('email').isEmail().normalizeEmail(),
-    body('message').notEmpty().trim().escape()
-], (req, res, next) => {
-    console.log(req.body.name);
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    // Extract form data
-    const formData = req.body;
-    const { name, phone, email, message } = formData;
-
-    // Sanitize form data
-    const sanitizedMessage = sanitizeHtml(message);
-
-    // Insert sanitized data into the database
-    const sql = 'INSERT INTO contact_submissions (name, phone, email, message) VALUES (?, ?, ?, ?)';
-    const values = [name, phone, email, sanitizedMessage];
-
-    connection.query(sql, values, (error, results) => {
-        if (error) {
-            console.error('Error inserting data into MySQL:', error);
-            next(error);
-            return;
-        }
-        console.log('Data inserted into MySQL:', results);
-        res.send('Form submitted successfully!');
+app.get('/users', (req, res) => {
+    db.query('SELECT * FROM users', (error, results, fields) => {
+      if (error) {
+        console.error('Error executing MySQL query:', error);
+        res.status(500).send('Error executing MySQL query');
+        return;
+      }
+      res.json(results); // Assuming you want to send the query results as JSON
     });
-});
+  });
+
+
+
+
 
 // Define route to display contact submissions
 app.get('/contact-submissions', (req, res) => {
@@ -122,27 +93,26 @@ app.get('/contact-submissions', (req, res) => {
     });
 });
 
-app.post('/submit-form', (req, res) => {
-    const { name, email, phone, message } = req.body;
-    
-    // Insert form data into the database
-    const sql = 'INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [name, email, phone, message], (err, result) => {
-      if (err) {
-        console.error('Error inserting data into MySQL:', err);
-        res.status(500).json({ success: false, error: 'Failed to submit form' });
-      } else {
-        console.log('Form data inserted into MySQL:', result);
-        res.status(200).json({ success: true, message: 'Form submitted successfully' });
+app.post('/users', (req, res) => {
+    console.log(req.body);
+    const { name, email, phone, password, date,time } = req.body;
+    db.query(
+      'INSERT INTO users (name, email, phone, password, appointment_time) VALUES (?, ?, ?, ?, ?)',
+      [name, email, phone, password, date+" "+time],
+      (error, results) => {
+        if (error) {
+          console.error('Error creating user:', error);
+        //   res.status(500).json({ error: 'Error creating user' });
+          return;
+        }
+        console.log("Data Submitted Successfully...")
+        res.render('Contactss', { message: 'User created successfully', id: results.insertId });
       }
-    });
+    );
   });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error('An error occurred:', err);
-    res.status(500).send('Internal Server Error');
-});
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
