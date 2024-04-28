@@ -10,31 +10,57 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
         }
 
-        
         .background-container {
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
             background: linear-gradient(to bottom, #63a4ff, #83eaf1);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 800px; /* Adjust the maximum width */
-            margin: 20px;
-            padding: 40px; /* Adjust the padding */
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Drop shadow */
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
             text-align: center;
         }
+
+        .nav-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #6112d7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #4b0eaa;
+        }
+
         /* Blog title */
         .blog-title {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #6112d7; /* Purple color */
+            color: #6112d7;
             margin-bottom: 20px;
         }
 
@@ -48,14 +74,14 @@
 
         /* Individual blog post */
         .blog-post {
-            max-width: 300px; /* Adjust as needed for different screen sizes */
+            flex: 0 1 300px;
             margin-bottom: 2rem;
             padding: 2rem;
             background-color: #ffffff;
             border-radius: 1rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-            text-align: left; /* Align post content to the left */
+            text-align: left;
         }
 
         .blog-post:hover {
@@ -73,7 +99,8 @@
         /* Post excerpt */
         .post-excerpt {
             margin-top: 1rem;
-            font-size: 1rem; /* Adjust as needed */
+            font-size: 1rem;
+            color: #555;
         }
 
         /* Author avatar */
@@ -83,6 +110,8 @@
             border-radius: 50%;
             margin-right: 0rem;
             transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto 1rem;
         }
 
         .author-avatar:hover {
@@ -95,7 +124,7 @@
                 font-size: 2rem;
             }
             .blog-post {
-                max-width: 100%;
+                flex-basis: calc(50% - 20px);
             }
         }
     </style>
@@ -103,6 +132,12 @@
 <body>
     <div class="background-container">
         <div class="container">
+            <div class="nav-container">
+                <a href="Homepage" class="nav-button">Homepage</a>
+                <a href="/contact-us" class="nav-button">Contact Us</a>
+                <a href="Service" class="nav-button">Services</a>
+                <a href="AboutDoctors" class="nav-button">About Doctors</a>
+            </div>
             <div class="blog-header">
                 <h2 class="blog-title">About The Doctors</h2>
             </div>

@@ -3,9 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr.Sheetal Kudale</title>
+    <title>About Doctors</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        .background-container {
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            background: linear-gradient(to bottom, #63a4ff, #83eaf1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .nav-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #6112d7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #4b0eaa;
+        }
+
+        /* Blog title */
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #6112d7;
+            margin-bottom: 20px;
+        }
+
+        /* Blog posts */
+        .blog-posts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Individual blog post */
+        .blog-post {
+            flex: 0 1 300px;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Post title */
+        .post-title {
+            margin-top: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #6112d7;
+        }
+
+        /* Post excerpt */
+        .post-excerpt {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Author avatar */
+        .author-avatar {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            margin-right: 0rem;
+            transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto 1rem;
+        }
+
+        .author-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        /* Mobile styles */
+        @media screen and (max-width: 768px) {
+            .blog-title {
+                font-size: 2rem;
+            }
+            .blog-post {
+                flex-basis: calc(50% - 20px);
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="background-container">
+        <div class="container">
+            <div class="nav-container">
+                <a href="Homepage" class="nav-button">Homepage</a>
+                <a href="/contact-us" class="nav-button">Contact Us</a>
+                <a href="Service" class="nav-button">Services</a>
+                <a href="AboutDoctors" class="nav-button">About Doctors</a>
+            </div>
+            <div class="blog-header">
+                <h2 class="blog-title">About The Doctors</h2>
+            </div>
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <div class="post-content">
+                        <img src="Pictures/Dr.Mahesh Kudale.jpeg" alt="Dr.Mahesh Kudale" class="author-avatar">
+                        <h3 class="post-title"><a href="about/doctor1">Dr.Mahesh Kudale</a></h3>
+                        <p class="post-excerpt">
+                            <h2>B.A.M.S.</h2>
+                            <p>Family Physician<br>Ayurvedic Consultant<br>Panchkarma<br>Viddhakarma Specialist</p>
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

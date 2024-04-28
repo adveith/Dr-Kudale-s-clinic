@@ -5,130 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Display</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+  <style>
+    /* Custom CSS for navigation and styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
 
-<div class="container mx-auto px-4 py-8">
+    .navbar {
+      background-color: #4b5563;
+      padding: 1rem;
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .navbar li {
+      display: inline;
+      margin-right: 1rem;
+    }
+
+    .navbar a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #d1d5db;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .product-card .product-details {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333333;
+    }
+
+    .product-card p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666666;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <ul>
+    <a href="Homepage" class="nav-button">Home       :</a>
+      <a href="/contact-us" class="nav-button">Contact      :</a>
+      <a href="Service" class="nav-button">Services       :</a>
+      <a href="AboutDoctors" class="nav-button">About Doctors</a>
+  </ul>
+</div>
+
+<div class="container">
   <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Services We Provide</h2>
 
-  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div class="grid">
     <!-- Product cards will be inserted here dynamically -->
   </div>
 </div>
 
 <script>
-// You can add JavaScript code here to dynamically fetch and populate product data
-// For demonstration purposes, let's assume we have an array of product objects
+  // You can add JavaScript code here to dynamically fetch and populate product data
+  // For demonstration purposes, let's assume we have an array of product objects
 
-const products = [
-  {
-    name: "Family Physician",
-    imageUrl: "./Pictures/1.jpeg",
-    price: "₹99",
-    link: "#"
-  },
-  {
-    name: "Ayurvedic Consultant",
-    imageUrl: "./Pictures/2.jpg",
-    price: "₹99",
-    link: "#"
-  },
-  {
-    name: "Panchkarma",
-    imageUrl: "./Pictures/4.jpg",
-    price: "₹99",
-    link: "#"
-  },
-  {
-    name: "Viddha Karma",
-    imageUrl: "./Pictures/3.jpg",
-    price: "₹99",
-    link: "#"
-  },
-  {
-    name: "Homoepathic consultant",
-    imageUrl: "./Pictures/5.jpg",
-    price: "₹99",
-    link: "#"
-  }, {
-    name: "Nutritionist",
-    imageUrl: "./Pictures/6.jpg",
-    price: "₹99",
-    link: "#"
-  }, {
-    name: "Day care",
-    imageUrl: "./Pictures/7.jpg",
-    price: "₹99",
-    link: "#"
-  }, {
-    name: "Pathology (blood urine test)",
-    imageUrl: "./Pictures/8.jpg",
-    price: "₹99",
-    link: "#"
-    
-  },
-  {
-    name: "Digital Xray - Homeservice)",
-    imageUrl: "./Pictures/9.jpg",
-    price: "₹99",
-    link: "#"
-    
-  },
-  {
-    name: "Ecg - Homeservice)",
-    imageUrl: "./Pictures/10.jpg",
-    price: "₹99",
-    link: "#"
-    
-  },
-  {
-    name: "Nebulization - Homeservice)",
-    imageUrl: "./Pictures/11.jpg",
-    price: "₹99",
-    link: "#"
-    
-  },
-  {
-    name: "Rta - Homeservice)",
-    imageUrl: "./Pictures/12.jpg",
-    price: "₹99",
-    link: "#"
-    
+  const products = [
+  { name: "Family Physician", imageUrl: "./Pictures/1.jpeg", price: "₹99", link: "#" }, { name: "Ayurvedic Consultant", imageUrl: "./Pictures/2.jpg", price: "₹99", link: "#" }, { name: "Panchkarma", imageUrl: "./Pictures/4.jpg", price: "₹99", link: "#" }, { name: "Viddha Karma", imageUrl: "./Pictures/3.jpg", price: "₹99", link: "#" }, { name: "Homoepathic consultant", imageUrl: "./Pictures/5.jpg", price: "₹99", link: "#" }, 
+  { name: "Nutritionist", imageUrl: "./Pictures/6.jpg", price: "₹99", link: "#" }, 
+  { name: "Day care", imageUrl: "./Pictures/7.jpg", price: "₹99", link: "#" }, 
+  { name: "Pathology (blood urine test)", imageUrl: "./Pictures/8.jpg", price: "₹99", link: "#" }, 
+  { name: "Digital Xray - Homeservice)", imageUrl: "./Pictures/9.jpg", price: "₹99", link: "#" }, 
+  { name: "Ecg - Homeservice)", imageUrl: "./Pictures/10.jpg", price: "₹99", link: "#" }, 
+  { name: "Nebulization - Homeservice)", imageUrl: "./Pictures/11.jpg", price: "₹99", link: "#" }, 
+  { name: "Rta - Homeservice)", imageUrl: "./Pictures/12.jpg", price: "₹99", link: "#" }
+    // Other product objects...
+  ];
+
+  // Function to create product cards dynamically
+  function createProductCards() {
+    const productGrid = document.querySelector(".grid");
+
+    products.forEach(product => {
+      const productCard = document.createElement("div");
+      productCard.classList.add("product-card");
+
+      const image = document.createElement("img");
+      image.src = product.imageUrl;
+      image.alt = product.name;
+
+      const productDetails = document.createElement("div");
+      productDetails.classList.add("product-details");
+
+      const productName = document.createElement("h3");
+      productName.textContent = product.name;
+
+      const productPrice = document.createElement("p");
+      productPrice.textContent = product.price;
+
+      productDetails.appendChild(productName);
+      productDetails.appendChild(productPrice);
+
+      productCard.appendChild(image);
+      productCard.appendChild(productDetails);
+
+      productGrid.appendChild(productCard);
+    });
   }
-];
 
-// Function to create product cards dynamically
-function createProductCards() {
-  const productGrid = document.querySelector(".grid");
-
-  products.forEach(product => {
-    const productCard = document.createElement("a");
-    productCard.href = product.link;
-    productCard.classList.add("group", "flex", "flex-col", "items-center", "p-4", "bg-white", "shadow-md", "rounded-lg", "hover:shadow-xl", "transition", "duration-300", "ease-in-out");
-
-    const image = document.createElement("img");
-    image.src = product.imageUrl;
-    image.alt = product.name;
-    image.classList.add("h-64", "w-full", "object-cover", "rounded-t-lg");
-
-    const productName = document.createElement("h3");
-    productName.textContent = product.name;
-    productName.classList.add("text-lg", "font-semibold", "text-gray-800", "my-2");
-
-    const productPrice = document.createElement("p");
-    productPrice.textContent = product.price;
-    productPrice.classList.add("text-gray-600");
-
-    productCard.appendChild(image);
-    productCard.appendChild(productName);
-    productCard.appendChild(productPrice);
-
-    productGrid.appendChild(productCard);
-  });
-}
-
-// Call the function to create product cards when the page loads
-window.onload = createProductCards;
+  // Call the function to create product cards when the page loads
+  window.onload = createProductCards;
 </script>
 
 </body>
